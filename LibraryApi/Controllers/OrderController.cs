@@ -40,7 +40,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             if (items == null) return NotFound();
             return Ok(items);
         }
-        [HttpPost("Create")]
+        [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddOrder(OrderCreateDTO order)
         {
@@ -51,7 +51,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return CreatedAtAction("GetOrderByID", new { ID = _order.ID }, order);
 
         }
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         [Authorize]
         public async Task<IActionResult> EditOrder(int id, OrderDTO order)
         {
@@ -62,7 +62,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return NoContent();
 
         }
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
             await OrderRepository.DeleteAsync(id);
