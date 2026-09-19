@@ -64,7 +64,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return Ok(IsInStock);
             
         }
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> AddBook(BookDTO book)
         {
             if (book == null||!ModelState.IsValid) return BadRequest();
@@ -75,7 +75,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return CreatedAtAction("GetBookByID", new {ID=bookModel.ID}, book);
             
         }
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> EditBook(int id,BookUpdateDTO book)
         {
             if (book == null || !ModelState.IsValid) return BadRequest();
@@ -85,7 +85,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return NoContent();
             
         }
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             await BookRepository.DeleteAsync(id);
