@@ -37,7 +37,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             if (books == null) return NotFound();
             return Ok(books);
         }
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> AddAuthor(AuthorCreateDTO author)
         {
             Author _author= AuthorServices.CreateDtoToAuthor(author);
@@ -46,7 +46,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return CreatedAtAction("GetAuthorByID", new { ID = _author.ID }, author);
 
         }
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> EditAuthor(int id, AuthorDTO author)
         {
             Author _author = AuthorServices.DtoToAuthor(author);
@@ -55,7 +55,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return NoContent();
 
         }
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             await AuthorRepository.DeleteAsync(id);
