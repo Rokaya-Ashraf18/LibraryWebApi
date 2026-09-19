@@ -37,7 +37,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             if (books == null) return NotFound();
             return Ok(books);
         }
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> AddCategory(CategoryCreateDTO cat)
         {
             Category category = CategoryServices.CreateDtoToCategory(cat);
@@ -46,7 +46,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return CreatedAtAction("GetCategoryByID", new { ID = category.ID }, cat);
 
         }
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> EditCategory(int id, CategoryDTO category)
         {
             await CategoryRepository.Update(id, CategoryServices.DtoToCategory(category));
@@ -54,7 +54,7 @@ namespace LibraryWebApi.LibraryApi.Controllers
             return NoContent();
 
         }
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             await CategoryRepository.DeleteAsync(id);
